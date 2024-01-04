@@ -15,6 +15,9 @@ public class PostEntity {
     @Column(name = "post_id")
     private Integer id;
 
+    @Column(name = "topic_code")
+    private String topicCode;
+
     @Column(name = "post_title")
     private String title;
 
