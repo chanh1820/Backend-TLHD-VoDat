@@ -2,8 +2,11 @@ package com.chanhmn.backendforum.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Data
@@ -30,13 +33,17 @@ public class PostEntity {
     @Column(name = "author")
     private String author;
 
-    @Column(name = "create_date")
+    @CreationTimestamp
+    @Column(name = "create_date", nullable = false, updatable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     private LocalDateTime createDate;
 
+    @UpdateTimestamp
     @Column(name = "update_date")
     private LocalDateTime updateDate;
 
     @Column(name = "delete_flag")
     private boolean deleteFlag;
 
+    @OneToMany(mappedBy = "postEntity", fetch = FetchType.EAGER)
+    private List<PostCommentEntity> postCommentEntityList;
 }

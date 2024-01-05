@@ -17,7 +17,7 @@ public class TopicController {
 
     @Autowired
     TopicService topicService;
-    @PostMapping("/find_all")
+    @PostMapping("/get_all")
     public List<TopicEntity> createProduct(@RequestBody TopicSCO topicSCO) {
         List<TopicEntity> topicEntityList = topicService.findAll();
         return topicEntityList;
