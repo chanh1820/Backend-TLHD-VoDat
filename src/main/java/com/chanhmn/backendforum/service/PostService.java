@@ -9,11 +9,13 @@ import com.chanhmn.backendforum.entity.PostEntity;
 import java.util.List;
 
 public interface PostService {
-    List<PostEntity> getAll(PostSCO postSCO);
+    List<PostDTO> getAll(PostSCO postSCO);
 
     PostDTO getDetail(PostSCO postSCO);
 
     PostEntity insert(PostDTO postDTO);
+
+    List<PostEntity> searchPost(PostSCO postSCO);
 
     PostCommentEntity insertComment(PostCommentDTO postCommentDTO);
 }

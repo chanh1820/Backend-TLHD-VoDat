@@ -2,6 +2,7 @@ package com.chanhmn.backendforum.core.transformer;
 
 import com.chanhmn.backendforum.core.dto.PostDTO;
 import com.chanhmn.backendforum.entity.PostEntity;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -9,6 +10,9 @@ import java.util.List;
 
 @Component
 public class PostMapper implements BaseMapper<PostEntity, PostDTO> {
+
+    @Autowired
+    PostCommentMapper postCommentMapper;
     @Override
     public PostEntity dtoToEntity(PostDTO dto) {
         PostEntity postEntity = new PostEntity();
@@ -31,7 +35,6 @@ public class PostMapper implements BaseMapper<PostEntity, PostDTO> {
             postEntity.setAuthor(dto.getAuthor());
         }
         if (dto.getCreateDate() != null) {
-            System.out.println(""+dto.getCreateDate() != null);
             postEntity.setCreateDate(dto.getCreateDate());
         }
         if (dto.getUpdateDate() != null) {
@@ -67,6 +70,9 @@ public class PostMapper implements BaseMapper<PostEntity, PostDTO> {
         }
         if (postEntity.getUpdateDate() != null) {
             postDTO.setUpdateDate(postEntity.getUpdateDate());
+        }
+        if (postEntity.getPostCommentEntityList() != null) {
+            postDTO.setPostCommentDTOList(postCommentMapper.entityListToDTOList(postEntity.getPostCommentEntityList()));
         }
         postDTO.setDeleteFlag(postEntity.isDeleteFlag());
         return postDTO;
