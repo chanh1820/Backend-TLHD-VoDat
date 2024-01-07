@@ -1,8 +1,10 @@
 # FROM maven:3.8.2-jdk-8 # for Java 8
-FROM maven:3.8.5-openjdk-17
+FROM openjdk:17-jdk-alpine
 
-WORKDIR /bezkoder-app
-COPY . .
-RUN mvn clean install
+WORKDIR /app
 
-CMD mvn spring-boot:run
+VOLUME /tmp
+
+ADD target/backend-forum-0.0.1-SNAPSHOT.jar backend-forum-0.0.1-SNAPSHOT.jar
+
+ENTRYPOINT ["java", "-jar", "backend-forum-0.0.1-SNAPSHOT.jar"]
