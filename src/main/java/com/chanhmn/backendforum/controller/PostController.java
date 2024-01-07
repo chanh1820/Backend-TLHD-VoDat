@@ -13,9 +13,7 @@ import com.chanhmn.backendforum.entity.PostEntity;
 import com.chanhmn.backendforum.entity.PostInteractionEntity;
 import com.chanhmn.backendforum.service.PostService;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -47,9 +45,9 @@ public class PostController {
     public List<PostDTO> getPostList(@RequestBody PostSCO postSCO) {
         log.info("Start searchPostList: {}", ObjectMapperUtils.dtoToString(postSCO));
         List<PostEntity> postEntityList = postService.searchPost(postSCO);
-//        log.info("End searchPostList: {}", ObjectMapperUtils.dtoToString(postEntityList));
         List<PostDTO> postDTOList = postMapper.entityListToDTOList(postEntityList);
-//        log.info("End searchPostList: {}", ObjectMapperUtils.dtoToString(postDTOList));
+        log.info("End searchPostList");
+
         return postDTOList;
     }
 
@@ -57,8 +55,6 @@ public class PostController {
     public ResponseDTO<PostDTO> getPostDetail(@RequestBody PostSCO postSCO) {
         log.info("Start getPostDetail: {}", ObjectMapperUtils.dtoToString(postSCO));
         PostDTO postDTO = postService.getDetail(postSCO);
-        log.info("End getPostDetail: {}", ObjectMapperUtils.dtoToString(postDTO));
-
         ResponseDTO<PostDTO> responseDTO = new ResponseDTO<>();
         if (postDTO == null) {
             responseDTO.setStatusCode(DBConstant.STATUS_CODE_ERROR);
@@ -66,6 +62,8 @@ public class PostController {
             return responseDTO;
         }
         responseDTO.setData(postDTO);
+        log.info("End getPostDetail");
+
         return responseDTO;
     }
 
@@ -74,21 +72,25 @@ public class PostController {
         log.info("Start insertPostComment: {}", ObjectMapperUtils.dtoToString(postCommentDTO));
         ResponseDTO<PostCommentEntity> responseDTO = new ResponseDTO<>();
         PostCommentEntity postCommentEntity = postService.insertComment(postCommentDTO);
-        log.info("Start insertPostComment");
+        log.info("End insertPostComment");
         responseDTO.setData(postCommentEntity);
         return responseDTO;
     }
 
     @PostMapping("/interact/insert")
-    public ResponseDTO<PostInteractionEntity> insertPostComment(@RequestBody PostInteractionDTO postInteractionDTO) {
-        log.info("Start getPostDetail: {}", ObjectMapperUtils.dtoToString(postInteractionDTO));
+    public ResponseDTO<PostInteractionEntity> insertPostInteract(@RequestBody PostInteractionDTO postInteractionDTO) {
+        log.info("Start insertPostInteract: {}", ObjectMapperUtils.dtoToString(postInteractionDTO));
+        ResponseDTO<PostInteractionEntity> responseDTO = postService.insertInteract(postInteractionDTO);
+        log.info("End insertPostInteract");
+        return responseDTO;
+    }
+
+    @PostMapping("/interact/delete")
+    public ResponseDTO<PostInteractionEntity> deletePostInteract(@RequestBody PostInteractionDTO postInteractionDTO) {
+        log.info("Start deletePostInteract: {}", ObjectMapperUtils.dtoToString(postInteractionDTO));
         ResponseDTO<PostInteractionEntity> responseDTO = new ResponseDTO<>();
-        PostInteractionEntity postInteractionEntity = postService.insertInteract(postInteractionDTO);
-        if(ObjectUtils.isEmpty(postInteractionEntity)){
-            responseDTO.setMessage("");
-            responseDTO.setStatusCode(DBConstant.STATUS_CODE_ERROR);
-        }
-        responseDTO.setData(postInteractionEntity);
+        postService.deletePostInteract(postInteractionDTO);
+        log.info("End deletePostInteract");
         return responseDTO;
     }
 

@@ -1,6 +1,5 @@
 package com.chanhmn.backendforum.core.dto;
 
-import com.chanhmn.backendforum.entity.PostEntity;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
@@ -25,6 +24,8 @@ public class PostCommentDTO {
     private LocalDateTime createDate;
 
     private boolean deleteFlag;
+
+    private Integer postId;
 
     private PostDTO postDTO;
 

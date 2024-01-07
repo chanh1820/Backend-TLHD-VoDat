@@ -25,7 +25,4 @@ public class PostInteractionDTO {
     private PostEntity postEntity;
 
     private Integer postId;
-
-    private boolean deleteFlag;
-
 }

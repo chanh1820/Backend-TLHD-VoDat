@@ -3,6 +3,7 @@ package com.chanhmn.backendforum.service;
 import com.chanhmn.backendforum.core.dto.PostCommentDTO;
 import com.chanhmn.backendforum.core.dto.PostDTO;
 import com.chanhmn.backendforum.core.dto.PostInteractionDTO;
+import com.chanhmn.backendforum.core.dto.ResponseDTO;
 import com.chanhmn.backendforum.core.sco.PostSCO;
 import com.chanhmn.backendforum.entity.PostCommentEntity;
 import com.chanhmn.backendforum.entity.PostEntity;
@@ -21,7 +22,9 @@ public interface PostService {
 
     PostCommentEntity insertComment(PostCommentDTO postCommentDTO);
 
-    PostInteractionEntity insertInteract(PostInteractionDTO postInteractionDTO);
+    ResponseDTO<PostInteractionEntity> insertInteract(PostInteractionDTO postInteractionDTO);
 
     boolean validateInteractUser(PostInteractionDTO postInteractionDTO);
+
+    void deletePostInteract(PostInteractionDTO postInteractionDTO);
 }
