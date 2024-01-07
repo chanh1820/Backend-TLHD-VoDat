@@ -6,14 +6,20 @@ import com.chanhmn.backendforum.entity.PostInteractionEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+@Repository
 public interface PostInteractionRepository extends JpaRepository<PostInteractionEntity, Integer> {
     @Query("SELECT p FROM PostInteractionEntity p WHERE " +
             "postId = :postId"+
-            "userName = :userName"+
-            "type = :type"+
-            "deleteFlag = :deleteFlag")
-    List<PostInteractionEntity> getInteractByUser(int postId, String userName, String type, boolean deleteFlag);
+            " AND userName = :userName"+
+            " AND type = :type"+
+            " AND deleteFlag = :deleteFlag")
+    List<PostInteractionEntity> getInteractByUser(
+            @Param("postEntity2") int postId,
+            @Param("userName")String userName,
+            @Param("type")String type,
+            @Param("deleteFlag")boolean deleteFlag);
 }

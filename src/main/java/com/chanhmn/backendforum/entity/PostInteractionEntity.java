@@ -34,4 +34,5 @@ public class PostInteractionEntity {
     @JoinColumn(name = "post_id", referencedColumnName = "post_id")
     private PostEntity postEntity2;
 
+
 }

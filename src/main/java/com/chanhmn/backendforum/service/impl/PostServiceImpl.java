@@ -20,6 +20,7 @@ import jakarta.persistence.TypedQuery;
 import jakarta.persistence.criteria.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -97,6 +98,7 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
+    @Transactional
     public PostInteractionEntity insertInteract(PostInteractionDTO postInteractionDTO) {
         if(validateInteractUser(postInteractionDTO)){
              return postInteractionRepository.save(postInteractionMapper.dtoToEntity(postInteractionDTO));
