@@ -52,6 +52,9 @@ public class PostEntity {
     @Column(name = "delete_flag")
     private boolean deleteFlag;
 
-    @OneToMany(mappedBy = "postEntity", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "postEntity")
     private List<PostCommentEntity> postCommentEntityList;
+
+    @OneToMany(mappedBy = "postEntity2")
+    private List<PostInteractionEntity> postInteractionEntityList;
 }

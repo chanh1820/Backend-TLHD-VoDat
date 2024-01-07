@@ -1,5 +1,9 @@
 package com.chanhmn.backendforum.entity;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -24,6 +28,8 @@ public class PostCommentEntity {
     @Column(name = "comment_content")
     private String content;
 
+    @JsonSerialize(using = LocalDateTimeSerializer.class)
+    @JsonDeserialize(using = LocalDateTimeDeserializer.class)
     @Column(name = "create_date")
     private LocalDateTime createDate;
 

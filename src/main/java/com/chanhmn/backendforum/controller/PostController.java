@@ -1,5 +1,6 @@
 package com.chanhmn.backendforum.controller;
 
+import com.chanhmn.backendforum.core.constant.DBConstant;
 import com.chanhmn.backendforum.core.dto.PostCommentDTO;
 import com.chanhmn.backendforum.core.dto.PostDTO;
 import com.chanhmn.backendforum.core.dto.ResponseDTO;
@@ -11,6 +12,7 @@ import com.chanhmn.backendforum.entity.PostEntity;
 import com.chanhmn.backendforum.service.PostService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -42,16 +44,26 @@ public class PostController {
     public List<PostDTO> getPostList(@RequestBody PostSCO postSCO) {
         log.info("Start searchPostList: {}", ObjectMapperUtils.dtoToString(postSCO));
         List<PostEntity> postEntityList = postService.searchPost(postSCO);
+//        log.info("End searchPostList: {}", ObjectMapperUtils.dtoToString(postEntityList));
         List<PostDTO> postDTOList = postMapper.entityListToDTOList(postEntityList);
-        log.info("End searchPostList: {}", ObjectMapperUtils.dtoToString(postDTOList));
-
+//        log.info("End searchPostList: {}", ObjectMapperUtils.dtoToString(postDTOList));
         return postDTOList;
     }
 
     @PostMapping("/get")
-    public PostDTO getPostDetail(@RequestBody PostSCO postSCO) {
-        List<PostDTO> postEntityList = postService.getAll(postSCO);
-        return null;
+    public ResponseDTO<PostDTO> getPostDetail(@RequestBody PostSCO postSCO) {
+        log.info("Start getPostDetail: {}", ObjectMapperUtils.dtoToString(postSCO));
+        PostDTO postDTO = postService.getDetail(postSCO);
+        log.info("End getPostDetail: {}", ObjectMapperUtils.dtoToString(postDTO));
+
+        ResponseDTO<PostDTO> responseDTO = new ResponseDTO<>();
+        if (postDTO == null) {
+            responseDTO.setStatusCode(DBConstant.STATUS_CODE_ERROR);
+            responseDTO.setMessage("Entity not found");
+            return responseDTO;
+        }
+        responseDTO.setData(postDTO);
+        return responseDTO;
     }
 
     @PostMapping("/comment/insert")

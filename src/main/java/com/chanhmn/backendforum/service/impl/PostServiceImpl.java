@@ -13,10 +13,7 @@ import com.chanhmn.backendforum.service.PostService;
 import jakarta.persistence.EntityManager;
 
 import jakarta.persistence.TypedQuery;
-import jakarta.persistence.criteria.CriteriaBuilder;
-import jakarta.persistence.criteria.CriteriaQuery;
-import jakarta.persistence.criteria.Predicate;
-import jakarta.persistence.criteria.Root;
+import jakarta.persistence.criteria.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -53,7 +50,7 @@ public class PostServiceImpl implements PostService {
         if (otp.isPresent()) {
             postDTO = postMapper.entityToDTO(otp.get());
         }
-        return null;
+        return postDTO;
     }
 
     @Override
@@ -68,7 +65,8 @@ public class PostServiceImpl implements PostService {
         CriteriaQuery<PostEntity> criteriaQuery = criteriaBuilder.createQuery(PostEntity.class);
 
         Root<PostEntity> root = criteriaQuery.from(PostEntity.class);
-
+//        root.fetch("postCommentEntityList");
+//        root.fetch("postInteractionEntityList");
         if(postSCO.getTopicCode()!=null){
             Predicate predicate = criteriaBuilder.equal(root.get("topicCode"), postSCO.getTopicCode());
             criteriaQuery.where(predicate);

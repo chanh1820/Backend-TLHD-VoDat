@@ -53,7 +53,8 @@ public class PostCommentMapper implements BaseMapper<PostCommentEntity, PostComm
         }
         postCommentDTO.setDeleteFlag(postCommentEntity.isDeleteFlag());
 
-        return postCommentDTO;    }
+        return postCommentDTO;
+    }
 
     @Override
     public List<PostCommentEntity> dtoListToEntityList(List<PostCommentDTO> postCommentDTOS) {

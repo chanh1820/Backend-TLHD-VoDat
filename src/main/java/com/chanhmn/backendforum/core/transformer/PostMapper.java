@@ -13,6 +13,9 @@ public class PostMapper implements BaseMapper<PostEntity, PostDTO> {
 
     @Autowired
     PostCommentMapper postCommentMapper;
+
+    @Autowired
+    PostInteractionMapper postInteractionMapper;
     @Override
     public PostEntity dtoToEntity(PostDTO dto) {
         PostEntity postEntity = new PostEntity();
@@ -71,9 +74,15 @@ public class PostMapper implements BaseMapper<PostEntity, PostDTO> {
         if (postEntity.getUpdateDate() != null) {
             postDTO.setUpdateDate(postEntity.getUpdateDate());
         }
-        if (postEntity.getPostCommentEntityList() != null) {
+        if (postEntity.getPostCommentEntityList() != null||postEntity.getPostCommentEntityList().size()!=0) {
             postDTO.setPostCommentDTOList(postCommentMapper.entityListToDTOList(postEntity.getPostCommentEntityList()));
         }
+        if (postEntity.getPostInteractionEntityList() != null||postEntity.getPostInteractionEntityList().size()!=0) {
+            postDTO.setPostInteractionDTOList(postInteractionMapper.entityListToDTOList(postEntity.getPostInteractionEntityList()));
+        }
+        postDTO.setCountComment(postEntity.getPostCommentEntityList().size());
+        postDTO.setCountInteract(postEntity.getPostInteractionEntityList().size());
+
         postDTO.setDeleteFlag(postEntity.isDeleteFlag());
         return postDTO;
     }
