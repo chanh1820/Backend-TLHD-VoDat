@@ -43,4 +43,6 @@ public class PostDTO {
 
     private Integer countInteract;
 
+    private Integer isLike;
+
 }

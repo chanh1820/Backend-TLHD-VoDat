@@ -3,14 +3,17 @@ package com.chanhmn.backendforum.controller;
 import com.chanhmn.backendforum.core.constant.DBConstant;
 import com.chanhmn.backendforum.core.dto.PostCommentDTO;
 import com.chanhmn.backendforum.core.dto.PostDTO;
+import com.chanhmn.backendforum.core.dto.PostInteractionDTO;
 import com.chanhmn.backendforum.core.dto.ResponseDTO;
 import com.chanhmn.backendforum.core.sco.PostSCO;
 import com.chanhmn.backendforum.core.transformer.PostMapper;
 import com.chanhmn.backendforum.core.util.ObjectMapperUtils;
 import com.chanhmn.backendforum.entity.PostCommentEntity;
 import com.chanhmn.backendforum.entity.PostEntity;
+import com.chanhmn.backendforum.entity.PostInteractionEntity;
 import com.chanhmn.backendforum.service.PostService;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -68,9 +71,24 @@ public class PostController {
 
     @PostMapping("/comment/insert")
     public ResponseDTO<PostCommentEntity> insertPostComment(@RequestBody PostCommentDTO postCommentDTO) {
+        log.info("Start insertPostComment: {}", ObjectMapperUtils.dtoToString(postCommentDTO));
         ResponseDTO<PostCommentEntity> responseDTO = new ResponseDTO<>();
         PostCommentEntity postCommentEntity = postService.insertComment(postCommentDTO);
+        log.info("Start insertPostComment");
         responseDTO.setData(postCommentEntity);
+        return responseDTO;
+    }
+
+    @PostMapping("/interact/insert")
+    public ResponseDTO<PostInteractionEntity> insertPostComment(@RequestBody PostInteractionDTO postInteractionDTO) {
+        log.info("Start getPostDetail: {}", ObjectMapperUtils.dtoToString(postInteractionDTO));
+        ResponseDTO<PostInteractionEntity> responseDTO = new ResponseDTO<>();
+        PostInteractionEntity postInteractionEntity = postService.insertInteract(postInteractionDTO);
+        if(ObjectUtils.isEmpty(postInteractionEntity)){
+            responseDTO.setMessage("");
+            responseDTO.setStatusCode(DBConstant.STATUS_CODE_ERROR);
+        }
+        responseDTO.setData(postInteractionEntity);
         return responseDTO;
     }
 
