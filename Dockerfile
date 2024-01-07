@@ -5,6 +5,6 @@ WORKDIR /app
 
 VOLUME /tmp
 
-ADD target/backend-forum-0.0.1-SNAPSHOT.jar backend-forum-0.0.1-SNAPSHOT.jar
+ADD backend-forum-0.0.1-SNAPSHOT.jar backend-forum-0.0.1-SNAPSHOT.jar
 
 ENTRYPOINT ["java", "-jar", "backend-forum-0.0.1-SNAPSHOT.jar"]
