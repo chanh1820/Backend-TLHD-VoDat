@@ -1,0 +1,154 @@
+{
+	"info": {
+		"_postman_id": "d04c14d7-b99b-41eb-9836-a5cef695838d",
+		"name": "TLHD-VoDat",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "16572442"
+	},
+	"item": [
+		{
+			"name": "findAllTopic",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"deleteFlag\": 0\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8080/topic/find_all"
+			},
+			"response": []
+		},
+		{
+			"name": "findAllTopic Copy",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"deleteFlag\": 0\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8080/topic/find_all"
+			},
+			"response": []
+		},
+		{
+			"name": "search_post",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"deleteFlag\": 0,\r\n    \"limit\": 100\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8080/post/search_post"
+			},
+			"response": []
+		},
+		{
+			"name": "get_post",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"deleteFlag\": 0,\r\n    \"limit\": 100\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8080/post/search_post"
+			},
+			"response": []
+		},
+		{
+			"name": "comment/insert",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"userName\": \"minhchanh\",\r\n    \"displayName\": \"Minh Chánh\",\r\n    \"content\": \"Chào\",\r\n    \"createDate\": \"2024-01-04T08:53:27\",\r\n    \"deleteFlag\": false,\r\n    \"postId\":1\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8080/post/comment/insert"
+			},
+			"response": []
+		},
+		{
+			"name": "interact/insert",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"userName\": \"minhchanh\",\r\n    \"displayName\": \"Minh Chánh\",\r\n    \"content\": \"Chào\",\r\n    \"createDate\": \"2024-01-04T08:53:27\",\r\n    \"deleteFlag\": false,\r\n    \"postId\":1\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8080/post/comment/insert"
+			},
+			"response": []
+		},
+		{
+			"name": "interact/delete",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"userName\": \"minhchanh\",\r\n    \"displayName\": \"Minh Chánh\",\r\n    \"content\": \"Chào\",\r\n    \"createDate\": \"2024-01-04T08:53:27\",\r\n    \"deleteFlag\": false,\r\n    \"postId\":1\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8080/post/comment/insert"
+			},
+			"response": []
+		},
+		{
+			"name": "getpost",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8080/post/get"
+			},
+			"response": []
+		}
+	]
+}
