@@ -42,13 +42,14 @@ public class PostController {
     }
 
     @PostMapping("/search_post")
-    public List<PostDTO> getPostList(@RequestBody PostSCO postSCO) {
+    public ResponseDTO<List<PostDTO>> getPostList(@RequestBody PostSCO postSCO) {
         log.info("Start searchPostList: {}", ObjectMapperUtils.dtoToString(postSCO));
+        ResponseDTO<List<PostDTO>> responseDTO = new ResponseDTO<>();
         List<PostEntity> postEntityList = postService.searchPost(postSCO);
         List<PostDTO> postDTOList = postMapper.entityListToDTOList(postEntityList);
+        responseDTO.setData(postDTOList);
         log.info("End searchPostList");
-
-        return postDTOList;
+        return responseDTO;
     }
 
     @PostMapping("/get")
