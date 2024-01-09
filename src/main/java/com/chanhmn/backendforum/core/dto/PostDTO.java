@@ -6,9 +6,7 @@ import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 import lombok.Data;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.List;
 
 @Data
@@ -43,6 +41,6 @@ public class PostDTO {
 
     private Integer countInteract;
 
-    private Integer isLike;
+    private Boolean isLike;
 
 }

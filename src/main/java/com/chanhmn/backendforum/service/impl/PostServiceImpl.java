@@ -69,6 +69,17 @@ public class PostServiceImpl implements PostService {
         if (otp.isPresent()) {
             postDTO = postMapper.entityToDTO(otp.get());
         }
+
+        List<PostInteractionEntity> postInteractionEntityList = postInteractionRepository.getInteractByUser(
+                postSCO.getId(),
+                postSCO.getUserId(),
+                DBConstant.TYPE_INTERACTION_LIKE
+        );
+        if(postInteractionEntityList.isEmpty()){
+            postDTO.setIsLike(false);
+        }else {
+            postDTO.setIsLike(true);
+        }
         return postDTO;
     }
 
