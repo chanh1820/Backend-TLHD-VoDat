@@ -154,5 +154,21 @@ public class PostServiceImpl implements PostService {
         postInteractionRepository.deleteById(postInteractionDTO.getId());
     }
 
+    @Override
+    @Transactional
+    public void deletePostInteractByUser(PostInteractionDTO postInteractionDTO) {
+
+        List<PostInteractionEntity> postInteractionEntityList = postInteractionRepository.getInteractByUser(
+                postInteractionDTO.getPostId(),
+                postInteractionDTO.getUserName(),
+                postInteractionDTO.getType()
+        );
+        if(postInteractionEntityList.isEmpty()){
+            return;
+        }else {
+            postInteractionRepository.deleteById(postInteractionEntityList.get(0).getId());
+        }
+    }
+
 
 }

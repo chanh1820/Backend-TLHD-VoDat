@@ -27,4 +27,6 @@ public interface PostService {
     boolean validateInteractUser(PostInteractionDTO postInteractionDTO);
 
     void deletePostInteract(PostInteractionDTO postInteractionDTO);
+
+    void deletePostInteractByUser(PostInteractionDTO postInteractionDTO);
 }

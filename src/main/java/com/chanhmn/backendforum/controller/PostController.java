@@ -90,7 +90,7 @@ public class PostController {
     public ResponseDTO<PostInteractionEntity> deletePostInteract(@RequestBody PostInteractionDTO postInteractionDTO) {
         log.info("Start deletePostInteract: {}", ObjectMapperUtils.dtoToString(postInteractionDTO));
         ResponseDTO<PostInteractionEntity> responseDTO = new ResponseDTO<>();
-        postService.deletePostInteract(postInteractionDTO);
+        postService.deletePostInteractByUser(postInteractionDTO);
         log.info("End deletePostInteract");
         return responseDTO;
     }
